@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looping Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            font-size: 2em;
+            width: 120px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Looping Auto Counter (200 → 400 → Restart)</h1>
+    <input type="number" id="counterInput" value="200" readonly>
+
+    <script>
+        let count = 0; // Start at 200
+        const inputField = document.getElementById("counterInput");
+        const speed = 50; // Speed in milliseconds
+
+        function startCounter() {
+            const interval = setInterval(() => {
+                if (count < 100) { 
+                    count++;
+                    inputField.value = count;
+                } else {
+                    clearInterval(interval); // Stop when it reaches 400
+                    setTimeout(() => { // Restart after a short delay
+                        count = 0;
+                        inputField.value = count;
+                        startCounter();
+                    }, 10); // 1-second pause before restarting
+                }
+            }, speed);
+        }
+
+        startCounter(); // Start the loop
+    </script>
+
+</body>
+</html>
